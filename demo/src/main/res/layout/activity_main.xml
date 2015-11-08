@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchMatch.Vertical"
+    android:background="#E2E7ED"
+    android:padding="@dimen/ac_gap">
+
+    <TextView
+        style="@style/MatchWrap"
+        android:background="@drawable/ac_selector_cancel"
+        android:button="@null"
+        android:gravity="center"
+        android:onClick="showAlertView"
+        android:padding="@dimen/ac_gap"
+        android:text="showAlertView"
+        android:textColor="@color/ac_item_text_default"
+        android:textSize="@dimen/ac_item_text_size" />
+
+    <TextView
+        style="@style/MatchWrap"
+        android:layout_marginTop="@dimen/ac_gap"
+        android:background="@drawable/ac_selector_cancel"
+        android:button="@null"
+        android:gravity="center"
+        android:onClick="showActionSheet"
+        android:padding="@dimen/ac_gap"
+        android:text="showActionSheet"
+        android:textColor="@color/ac_item_text_default"
+        android:textSize="@dimen/ac_item_text_size" />
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ac_bg_translucent">#80808080</color>
+    <color name="ac_bg_content">#F9F9F9</color>
+
+    <color name="ac_item_text_default">#007AFF</color>
+    <color name="ac_item_text_destructive">#FF3B30</color>
+    <color name="ac_item_bg_pressed">#EBEBEB</color>
+
+    <color name="ac_alert_title">#000000</color>
+    <color name="ac_alert_message">#000000</color>
+
+    <color name="ac_action_sheet_title">#929292</color>
+    <color name="ac_action_sheet_message">#929292</color>
+</resources>

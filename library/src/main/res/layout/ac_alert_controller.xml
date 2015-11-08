@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_alert_controller_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ac_bg_translucent"
+    android:paddingLeft="@dimen/ac_gap"
+    android:paddingRight="@dimen/ac_gap">
+
+    <cn.bingoogolapple.alertcontroller.BGAAlertView
+        android:id="@+id/alertView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <cn.bingoogolapple.alertcontroller.BGAActionSheetView
+        android:id="@+id/actionSheetView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/ac_gap"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</FrameLayout>
