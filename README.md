@@ -123,7 +123,7 @@ public void showActionSheet(View v) {
 </resources>
 ```
 
-### 代码是最好的老师，更多详细用法请查看[demo](https://github.com/bingoogolapple/BGAlertController-Android/tree/master/demo):feet:
+### 代码是最好的老师，更多详细用法请查看[demo](https://github.com/bingoogolapple/BGAAlertController-Android/tree/master/demo):feet:
 
 ## License
 
