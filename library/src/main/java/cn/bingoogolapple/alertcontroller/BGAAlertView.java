@@ -54,6 +54,7 @@ public class BGAAlertView extends LinearLayout {
         mTitleTv = new TextView(context);
         mTitleTv.setGravity(Gravity.CENTER);
         mTitleTv.setBackgroundResource(android.R.color.transparent);
+        mTitleTv.setClickable(true);
         int padding = getResources().getDimensionPixelOffset(R.dimen.ac_gap);
         mTitleTv.setPadding(padding, padding, padding, padding);
         addView(mTitleTv, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));

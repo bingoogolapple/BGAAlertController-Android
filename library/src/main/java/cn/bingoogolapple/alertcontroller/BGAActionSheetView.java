@@ -57,6 +57,7 @@ public class BGAActionSheetView extends LinearLayout {
         mTitleTv.setBackgroundResource(android.R.color.transparent);
         int padding = getResources().getDimensionPixelOffset(R.dimen.ac_gap);
         mTitleTv.setPadding(padding, padding, padding, padding);
+        mTitleTv.setClickable(true);
 
         mContanierLl = new LinearLayout(getContext());
         mContanierLl.setOrientation(VERTICAL);
