@@ -15,6 +15,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
 
-    compile 'cn.bingoogolapple:bga-alertcontroller:1.0.1@aar'
+    compile 'cn.bingoogolapple:bga-alertcontroller:1.0.2@aar'
 //    compile project(':library')
 }

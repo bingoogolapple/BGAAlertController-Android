@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ac_bg_translucent">#80808080</color>
+    <color name="ac_bg_translucent">#80CCCCCC</color>
     <color name="ac_bg_content">#F9F9F9</color>
 
     <color name="ac_item_text_default">#007AFF</color>

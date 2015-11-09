@@ -1,12 +1,12 @@
 /**
  * Copyright 2015 bingoogolapple
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -88,7 +88,7 @@ public class BGAActionSheetView extends LinearLayout {
             mTitleTv.setTextColor(mMessageColor);
             mTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMessageTextSize);
             mTitleTv.setText(message);
-        } else {
+        } else if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(message)) {
             SpannableString titleSs = new SpannableString(title + "\n" + message);
             titleSs.setSpan(new ForegroundColorSpan(mTitleColor), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             titleSs.setSpan(new AbsoluteSizeSpan(mTitleTextSize), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -97,6 +97,8 @@ public class BGAActionSheetView extends LinearLayout {
             titleSs.setSpan(new ForegroundColorSpan(mMessageColor), title.length(), titleSs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             titleSs.setSpan(new AbsoluteSizeSpan(mMessageTextSize), title.length(), titleSs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             mTitleTv.setText(titleSs);
+        } else {
+            mTitleTv.setVisibility(GONE);
         }
     }
 
@@ -123,14 +125,39 @@ public class BGAActionSheetView extends LinearLayout {
         if (mIsFirstShow) {
             mIsFirstShow = false;
 
-            if (mContanierLl.getChildCount() >= 3) {
-                for (int i = 2; i < mContanierLl.getChildCount(); i++) {
-                    View child = mContanierLl.getChildAt(i);
-                    if (child instanceof BGAActionItemView) {
-                        if (i == mContanierLl.getChildCount() - 1) {
-                            child.setBackgroundResource(R.drawable.ac_selector_bottom);
-                        } else {
-                            child.setBackgroundResource(R.drawable.ac_selector_center);
+            if (mTitleTv.getVisibility() == VISIBLE) {
+                if (mContanierLl.getChildCount() >= 3) {
+                    for (int i = 2; i < mContanierLl.getChildCount(); i++) {
+                        View child = mContanierLl.getChildAt(i);
+                        if (child instanceof BGAActionItemView) {
+                            if (i == mContanierLl.getChildCount() - 1) {
+                                child.setBackgroundResource(R.drawable.ac_selector_bottom);
+                            } else {
+                                child.setBackgroundResource(R.drawable.ac_selector_center);
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (mContanierLl.getChildCount() == 3) {
+                    // 移除第一条分割线
+                    mContanierLl.removeViewAt(1);
+
+                    mContanierLl.getChildAt(1).setBackgroundResource(R.drawable.ac_selector_cancel);
+                } else if (mContanierLl.getChildCount() > 3) {
+                    // 移除第一条分割线
+                    mContanierLl.removeViewAt(1);
+
+                    for (int i = 1; i < mContanierLl.getChildCount(); i++) {
+                        View child = mContanierLl.getChildAt(i);
+                        if (child instanceof BGAActionItemView) {
+                            if (i == 1) {
+                                child.setBackgroundResource(R.drawable.ac_selector_top);
+                            } else if (i == mContanierLl.getChildCount() - 1) {
+                                child.setBackgroundResource(R.drawable.ac_selector_bottom);
+                            } else {
+                                child.setBackgroundResource(R.drawable.ac_selector_center);
+                            }
                         }
                     }
                 }
