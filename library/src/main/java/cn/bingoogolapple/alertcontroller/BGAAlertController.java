@@ -18,7 +18,10 @@ package cn.bingoogolapple.alertcontroller;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -50,7 +53,7 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
         super(activity, R.style.BGAAlertController);
         setContentView(R.layout.ac_alert_controller);
         getWindow().setWindowAnimations(R.style.BGAWindow);
-        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, getScreenHeight(activity) - getStatusBarHeight(activity));
         setOnShowListener(this);
         setCancelable(false);
         setCanceledOnTouchOutside(false);
@@ -178,5 +181,18 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
 
     public enum AlertControllerStyle {
         ActionSheet, Alert
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
+
+    public static int getScreenHeight(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
     }
 }

@@ -5,8 +5,6 @@
 
 工作以来公司UI设计师出的Android效果图都是iOS风格的UIAlertView和UIActionSheet，新项目还是用原来那一套，不想重复造轮子，所以仿写了从iOS8开始支持的UIAlertController，统一UIAlertView和UIActionSheet的用法
 
-目前还不支持添加EditText，后续会支持
-
 ### 效果图
 
 ![Demo](http://7xk9dj.com1.z0.glb.clouddn.com/alertcontroller/screenshots/alertcontroller1.gif)

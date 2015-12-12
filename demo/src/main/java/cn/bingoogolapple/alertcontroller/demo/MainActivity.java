@@ -1,6 +1,7 @@
 package cn.bingoogolapple.alertcontroller.demo;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -50,24 +51,24 @@ public class MainActivity extends AppCompatActivity {
         BGAAlertController alertController = new BGAAlertController(this, "我是标题", "我是很长很长很长很长很长很长很长很长很长很长很长很长的消息", BGAAlertController.AlertControllerStyle.ActionSheet);
 //        BGAAlertController alertController = new BGAAlertController(this, "", "", BGAAlertController.AlertControllerStyle.ActionSheet);
         // 不管添加顺序怎样，AlertActionStyle.Cancel始终是在最底部的,AlertActionStyle.Default和AlertActionStyle.Destructive按添加的先后顺序显示
-//        alertController.addAction(new BGAAlertAction("取消", BGAAlertAction.AlertActionStyle.Cancel, new BGAAlertAction.Delegate() {
-//            @Override
-//            public void onClick() {
-//                showToast("点击了取消");
-//            }
-//        }));
+        alertController.addAction(new BGAAlertAction("取消", BGAAlertAction.AlertActionStyle.Cancel, new BGAAlertAction.Delegate() {
+            @Override
+            public void onClick() {
+                showToast("点击了取消");
+            }
+        }));
         alertController.addAction(new BGAAlertAction("其他1", BGAAlertAction.AlertActionStyle.Default, new BGAAlertAction.Delegate() {
             @Override
             public void onClick() {
                 showToast("点击了其他1");
             }
         }));
-//        alertController.addAction(new BGAAlertAction("其他2", BGAAlertAction.AlertActionStyle.Default, new BGAAlertAction.Delegate() {
-//            @Override
-//            public void onClick() {
-//                showToast("点击了其他2");
-//            }
-//        }));
+        alertController.addAction(new BGAAlertAction("其他2", BGAAlertAction.AlertActionStyle.Default, new BGAAlertAction.Delegate() {
+            @Override
+            public void onClick() {
+                showToast("点击了其他2");
+            }
+        }));
         alertController.addAction(new BGAAlertAction("确定", BGAAlertAction.AlertActionStyle.Destructive, new BGAAlertAction.Delegate() {
             @Override
             public void onClick() {
@@ -76,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         }));
         alertController.setCancelable(true);
         alertController.show();
+    }
+
+    public void test(View v) {
+        new AlertDialog.Builder(this).setTitle("测试").setMessage("系统自带对话框").setCancelable(true).show();
     }
 
     private void showToast(String msg) {
