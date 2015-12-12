@@ -68,6 +68,10 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
     private void initRootView() {
         mRootViewFl = (FrameLayout) findViewById(R.id.fl_alert_controller_root);
         mRootViewFl.setOnClickListener(this);
+        if (mPreferredStyle == AlertControllerStyle.Alert) {
+            int padding = getContext().getResources().getDimensionPixelOffset(R.dimen.ac_gap) * 3;
+            mRootViewFl.setPadding(padding, 0, padding, 0);
+        }
     }
 
     private void initContentView(String title, String message) {

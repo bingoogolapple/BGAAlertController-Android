@@ -7,7 +7,7 @@
 
 ### 效果图
 
-![Demo](http://7xk9dj.com1.z0.glb.clouddn.com/alertcontroller/screenshots/alertcontroller1.gif)
+![Demo](http://7xk9dj.com1.z0.glb.clouddn.com/alertcontroller/screenshots/alertcontroller2.gif)
 
 ### 基本使用
 

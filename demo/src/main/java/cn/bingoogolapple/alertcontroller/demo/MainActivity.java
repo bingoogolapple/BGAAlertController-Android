@@ -1,7 +1,6 @@
 package cn.bingoogolapple.alertcontroller.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -77,10 +76,6 @@ public class MainActivity extends AppCompatActivity {
         }));
         alertController.setCancelable(true);
         alertController.show();
-    }
-
-    public void test(View v) {
-        new AlertDialog.Builder(this).setTitle("测试").setMessage("系统自带对话框").setCancelable(true).show();
     }
 
     private void showToast(String msg) {

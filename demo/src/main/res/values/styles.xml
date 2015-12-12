@@ -1,10 +1,8 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--colorPrimary对应ActionBar的颜色-->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/windowBackground</item>
-        <!--colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色-->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
