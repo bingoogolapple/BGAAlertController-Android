@@ -17,17 +17,8 @@
 package cn.bingoogolapple.alertcontroller;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,11 +34,6 @@ public class BGAActionSheetView extends LinearLayout {
     private BGAActionItemView mCancelAiv;
     private boolean mIsFirstShow = true;
 
-    private int mTitleColor;
-    private int mMessageColor;
-    private int mTitleTextSize;
-    private int mMessageTextSize;
-
     public BGAActionSheetView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(VERTICAL);
@@ -56,7 +42,7 @@ public class BGAActionSheetView extends LinearLayout {
         mTitleTv.setGravity(Gravity.CENTER);
         mTitleTv.setBackgroundResource(android.R.color.transparent);
         int padding = getResources().getDimensionPixelOffset(R.dimen.ac_gap);
-        mTitleTv.setPadding(padding, padding, padding, padding);
+        mTitleTv.setPadding(padding * 2, padding, padding * 2, padding);
         mTitleTv.setClickable(true);
 
         mContanierLl = new LinearLayout(getContext());
@@ -65,41 +51,18 @@ public class BGAActionSheetView extends LinearLayout {
         mContanierLl.addView(mTitleTv, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         addView(mContanierLl, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        mTitleColor = getResources().getColor(R.color.ac_action_sheet_title);
-        mMessageColor = getResources().getColor(R.color.ac_action_sheet_message);
-        mTitleTextSize = getResources().getDimensionPixelOffset(R.dimen.ac_action_sheet_text_size_title);
-        mMessageTextSize = getResources().getDimensionPixelOffset(R.dimen.ac_action_sheet_text_size_message);
-
-        mTitleTv.setMinHeight(mTitleTextSize * 4);
     }
 
     public void setAlertController(BGAAlertController alertController) {
         mAlertController = alertController;
     }
 
-    public void setTitle(String title, String message) {
-        if (!TextUtils.isEmpty(title) && TextUtils.isEmpty(message)) {
-            mTitleTv.setTextColor(mTitleColor);
-            mTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
-            mTitleTv.getPaint().setFakeBoldText(true);
-            mTitleTv.setText(title);
-        } else if (TextUtils.isEmpty(title) && !TextUtils.isEmpty(message)) {
-            mTitleTv.setTextColor(mMessageColor);
-            mTitleTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mMessageTextSize);
-            mTitleTv.setText(message);
-        } else if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(message)) {
-            SpannableString titleSs = new SpannableString(title + "\n" + message);
-            titleSs.setSpan(new ForegroundColorSpan(mTitleColor), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            titleSs.setSpan(new AbsoluteSizeSpan(mTitleTextSize), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            titleSs.setSpan(new StyleSpan(Typeface.BOLD), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            titleSs.setSpan(new ForegroundColorSpan(mMessageColor), title.length(), titleSs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            titleSs.setSpan(new AbsoluteSizeSpan(mMessageTextSize), title.length(), titleSs.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            mTitleTv.setText(titleSs);
-        } else {
-            mTitleTv.setVisibility(GONE);
-        }
+    public void setTitle(CharSequence title, CharSequence message) {
+        int titleColor = getResources().getColor(R.color.ac_action_sheet_title);
+        int messageColor = getResources().getColor(R.color.ac_action_sheet_message);
+        int titleTextSize = getResources().getDimensionPixelOffset(R.dimen.ac_action_sheet_text_size_title);
+        int messageTextSize = getResources().getDimensionPixelOffset(R.dimen.ac_action_sheet_text_size_message);
+        BGAAlertControllerHelper.setTitle(mTitleTv, titleColor, titleTextSize, messageColor, messageTextSize, title, message);
     }
 
     public void addAction(BGAAlertAction alertAction) {
@@ -121,47 +84,15 @@ public class BGAActionSheetView extends LinearLayout {
         }
     }
 
+    public boolean showAble() {
+        return mCancelAiv != null || mContanierLl.getChildCount() > 1;
+    }
+
     public void handleBackground() {
         if (mIsFirstShow) {
             mIsFirstShow = false;
 
-            if (mTitleTv.getVisibility() == VISIBLE) {
-                if (mContanierLl.getChildCount() >= 3) {
-                    for (int i = 2; i < mContanierLl.getChildCount(); i++) {
-                        View child = mContanierLl.getChildAt(i);
-                        if (child instanceof BGAActionItemView) {
-                            if (i == mContanierLl.getChildCount() - 1) {
-                                child.setBackgroundResource(R.drawable.ac_selector_bottom);
-                            } else {
-                                child.setBackgroundResource(R.drawable.ac_selector_center);
-                            }
-                        }
-                    }
-                }
-            } else {
-                if (mContanierLl.getChildCount() == 3) {
-                    // 移除第一条分割线
-                    mContanierLl.removeViewAt(1);
-
-                    mContanierLl.getChildAt(1).setBackgroundResource(R.drawable.ac_selector_cancel);
-                } else if (mContanierLl.getChildCount() > 3) {
-                    // 移除第一条分割线
-                    mContanierLl.removeViewAt(1);
-
-                    for (int i = 1; i < mContanierLl.getChildCount(); i++) {
-                        View child = mContanierLl.getChildAt(i);
-                        if (child instanceof BGAActionItemView) {
-                            if (i == 1) {
-                                child.setBackgroundResource(R.drawable.ac_selector_top);
-                            } else if (i == mContanierLl.getChildCount() - 1) {
-                                child.setBackgroundResource(R.drawable.ac_selector_bottom);
-                            } else {
-                                child.setBackgroundResource(R.drawable.ac_selector_center);
-                            }
-                        }
-                    }
-                }
-            }
+            BGAAlertControllerHelper.handleBackground(mContanierLl);
         }
     }
 }

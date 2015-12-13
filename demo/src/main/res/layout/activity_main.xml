@@ -4,13 +4,35 @@
 
     <Button
         style="@style/DemoBtn"
-        android:onClick="showAlertView"
-        android:text="showAlertView" />
+        android:onClick="showAlertViewDemo1"
+        android:text="showAlertViewDemo1" />
 
     <Button
         style="@style/DemoBtn"
         android:layout_marginTop="@dimen/ac_gap"
-        android:onClick="showActionSheet"
-        android:text="showActionSheet" />
+        android:onClick="showActionSheetDemo1"
+        android:text="showActionSheetDemo1" />
+
+    <Button
+        style="@style/DemoBtn"
+        android:onClick="showAlertViewDemo2"
+        android:text="showAlertViewDemo2" />
+
+    <Button
+        style="@style/DemoBtn"
+        android:layout_marginTop="@dimen/ac_gap"
+        android:onClick="showActionSheetDemo2"
+        android:text="showActionSheetDemo2" />
+
+    <Button
+        style="@style/DemoBtn"
+        android:onClick="showAlertViewDemo3"
+        android:text="showAlertViewDemo3" />
+
+    <Button
+        style="@style/DemoBtn"
+        android:layout_marginTop="@dimen/ac_gap"
+        android:onClick="showActionSheetDemo3"
+        android:text="showActionSheetDemo3" />
 
 </LinearLayout>

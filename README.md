@@ -7,7 +7,7 @@
 
 ### 效果图
 
-![Demo](http://7xk9dj.com1.z0.glb.clouddn.com/alertcontroller/screenshots/alertcontroller2.gif)
+![Demo](http://7xk9dj.com1.z0.glb.clouddn.com/alertcontroller/screenshots/alertcontroller3.gif)
 
 ### 基本使用
 
@@ -89,7 +89,7 @@ public void showActionSheet(View v) {
 
 ``` xml
 <resources>
-    <color name="ac_bg_translucent">#80808080</color>
+    <color name="ac_bg_translucent">#01000000</color>
     <color name="ac_bg_content">#F9F9F9</color>
 
     <color name="ac_item_text_default">#007AFF</color>
@@ -99,12 +99,12 @@ public void showActionSheet(View v) {
     <color name="ac_alert_title">#000000</color>
     <color name="ac_alert_message">#000000</color>
 
-    <color name="ac_action_sheet_title">#929292</color>
-    <color name="ac_action_sheet_message">#929292</color>
+    <color name="ac_action_sheet_title">#4d4d4d</color>
+    <color name="ac_action_sheet_message">#8f8f8f</color>
 </resources>
 ```
 
-> 2.如果您不满意默认的间距和字体大小，在自己项目的colors.xml中定义以下相应的dimen（不用全部定义，对不满意的值重新定义即可）
+> 2.如果您不满意默认的间距和字体大小，在自己项目的dimens.xml中定义以下相应的dimen（不用全部定义，对不满意的值重新定义即可）
 
 ``` xml
 <resources>
@@ -117,6 +117,13 @@ public void showActionSheet(View v) {
 
     <dimen name="ac_alert_text_size_title">18sp</dimen>
     <dimen name="ac_alert_text_size_message">14sp</dimen>
+</resources>
+```
+
+> 3.如果您不满意默认动画时间，在自己项目的integers.xml中定义以下相应的integer
+``` xml
+<resources>
+    <integer name="ac_animation_duration">300</integer>
 </resources>
 ```
 

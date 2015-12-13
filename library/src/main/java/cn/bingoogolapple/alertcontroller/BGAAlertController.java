@@ -49,7 +49,11 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
 
     private BGAAlertAction mCancelAlertAction;
 
-    public BGAAlertController(Activity activity, String title, String message, AlertControllerStyle preferredStyle) {
+    public BGAAlertController(Activity activity, int titleResId, int messageResId, AlertControllerStyle preferredStyle) {
+        this(activity, titleResId == 0 ? null : activity.getString(titleResId), messageResId == 0 ? null : activity.getString(messageResId), preferredStyle);
+    }
+
+    public BGAAlertController(Activity activity, CharSequence title, CharSequence message, AlertControllerStyle preferredStyle) {
         super(activity, R.style.BGAAlertController);
         setContentView(R.layout.ac_alert_controller);
         getWindow().setWindowAnimations(R.style.BGAWindow);
@@ -74,7 +78,7 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
         }
     }
 
-    private void initContentView(String title, String message) {
+    private void initContentView(CharSequence title, CharSequence message) {
         if (mPreferredStyle == AlertControllerStyle.Alert) {
             mAlertView = (BGAAlertView) findViewById(R.id.alertView);
             mAlertView.setAlertController(this);
@@ -124,11 +128,19 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
             mIsDismissed = false;
             mRootViewFl.startAnimation(mAlphaEnterAnimation);
             if (mPreferredStyle == AlertControllerStyle.ActionSheet) {
-                mActionSheetView.handleBackground();
-                mActionSheetView.startAnimation(mActionSheetEnterAnimation);
+                if (mActionSheetView.showAble()) {
+                    mActionSheetView.handleBackground();
+                    mActionSheetView.startAnimation(mActionSheetEnterAnimation);
+                } else {
+                    throw new RuntimeException("必须至少添加一个BGAActionItemView");
+                }
             } else {
-                mAlertView.handleBackground();
-                mAlertView.startAnimation(mAlertEnterAnimation);
+                if (mAlertView.showAble()) {
+                    mAlertView.handleBackground();
+                    mAlertView.startAnimation(mAlertEnterAnimation);
+                } else {
+                    throw new RuntimeException("必须至少添加一个BGAActionItemView");
+                }
             }
         }
     }
@@ -168,6 +180,10 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
     public void addAction(BGAAlertAction alertAction) {
         if (alertAction == null) {
             return;
+        }
+
+        if (alertAction.getTitleResId() != 0) {
+            alertAction.setTitle(getContext().getString(alertAction.getTitleResId()));
         }
 
         if (mPreferredStyle == AlertControllerStyle.ActionSheet) {
