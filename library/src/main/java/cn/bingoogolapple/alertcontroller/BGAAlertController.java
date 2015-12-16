@@ -95,13 +95,25 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
     private void initAnim() {
         mAlertEnterAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_alert_enter);
         mAlertExitAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_alert_exit);
+        mAlertExitAnimation.setAnimationListener(new BGASimpelAnimationListener() {
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mAlertView.post(mDismissRunnable);
+            }
+        });
 
         mActionSheetEnterAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_action_sheet_enter);
         mActionSheetExitAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_action_sheet_exit);
+        mActionSheetExitAnimation.setAnimationListener(new BGASimpelAnimationListener() {
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mActionSheetView.post(mDismissRunnable);
+            }
+        });
 
         mAlphaEnterAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_alpha_enter);
         mAlphaExitAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.ac_alpha_exit);
-        mAlphaExitAnimation.setAnimationListener(new Animation.AnimationListener() {
+        mAlphaExitAnimation.setAnimationListener(new BGASimpelAnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 if (mPreferredStyle == AlertControllerStyle.ActionSheet) {
@@ -110,17 +122,16 @@ public class BGAAlertController extends Dialog implements View.OnClickListener, 
                     mAlertView.startAnimation(mAlertExitAnimation);
                 }
             }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                BGAAlertController.super.dismiss();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
         });
     }
+
+    // 解决 Attempting to destroy the window while drawing!
+    private Runnable mDismissRunnable = new Runnable() {
+        @Override
+        public void run() {
+            BGAAlertController.super.dismiss();
+        }
+    };
 
     @Override
     public void onShow(DialogInterface dialog) {
